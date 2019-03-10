@@ -1,28 +1,19 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import TryCatch from './TryCatch';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+const App = props => (
+  <TryCatch
+    render={() => {
+      const data = JSON.parse(JSON.stringify([{ name: 'theo a' }]));
+      return <div>{JSON.stringify(data)}</div>;
+    }}
+    onCatch={err => {
+      console.error('ERR', err);
+      return <div>failure {err.message} </div>;
+    }}
+  />
+);
 
 export default App;
